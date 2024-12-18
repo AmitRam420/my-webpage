@@ -28,3 +28,48 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Permissions</title>
+</head>
+<body>
+    <h1>Permission Request</h1>
+    <button id="accessCamera">Access Camera</button>
+    <button id="accessGallery">Access Gallery</button>
+    <button id="accessContacts">Access Contacts</button>
+
+    <script>
+        // Access Camera
+        document.getElementById("accessCamera").addEventListener("click", async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                alert("Camera access granted!");
+                // Do something with the stream, like display video
+            } catch (err) {
+                alert("Camera access denied!");
+            }
+        });
+
+        // Access Gallery (via file input)
+        document.getElementById("accessGallery").addEventListener("click", () => {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = "image/*";
+            input.onchange = (event) => {
+                const file = event.target.files[0];
+                alert(`Selected file: ${file.name}`);
+                // Process the selected file
+            };
+            input.click();
+        });
+
+        // Access Contacts (experimental, requires specific permissions)
+        document.getElementById("accessContacts").addEventListener("click", () => {
+            alert("Contact access requires user consent and advanced APIs.");
+        });
+    </script>
+</body>
+</html>
